@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sunnyweather.android.MainActivity
 import com.sunnyweather.android.databinding.FragmentPlaceBinding
 import com.sunnyweather.android.ui.weather.WeatherActivity
 
@@ -32,7 +33,7 @@ class PlaceFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         // 如果之前选择过城市，启动应用直接进入城市界面
-        if (viewModel.isPlaceSaved()) {
+        if (viewModel.isPlaceSaved() && activity is MainActivity) {
             val place = viewModel.getSavedPlace()
             val intent = Intent(context, WeatherActivity::class.java).apply {
                 putExtra("location_lng", place.location.lng)
